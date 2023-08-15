@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react';
-import { Loading } from './components/Loading';
-import { PokemonCard } from './components/PokemonCard';
+import { useEffect, useMemo, useState } from 'react'
+import { Loading } from '@/components/Loading'
+import { PokemonCard } from '@/components/PokemonCard'
 
 import Pokedex from 'pokedex-promise-v2'
 
@@ -16,27 +16,24 @@ export default function Home() {
   useEffect(() => {
     ;(async function getAllPokemons() {
       const pokedex = new Pokedex()
-      
+
       // Primeiro, obtemos os nomes de todos os Pokemons
-      await pokedex.getPokemonsList({offset: 0, limit: 1281})
+      await pokedex
+        .getPokemonsList({ offset: 0, limit: 1281 })
         .then((response) =>
           response.results.forEach((pokemonResponse) =>
-            pokemonNames.push(pokemonResponse.name)
-          )
+            pokemonNames.push(pokemonResponse.name),
+          ),
         )
         .finally(() => setLoadingMessage('Carregando Pokemons'))
-      
 
       // Logo após, realizamos uma requisição na API para cada pokemon
-      await pokedex.getPokemonByName(pokemonNames)
+      await pokedex
+        .getPokemonByName(pokemonNames)
         .then((response) =>
-          response.forEach((pokemon) =>
-            pokemons.push(pokemon)
-          )
+          response.forEach((pokemon) => pokemons.push(pokemon)),
         )
-        .finally(() =>
-          setIsLoading(false)
-        )
+        .finally(() => setIsLoading(false))
     })()
   }, [pokemonNames, pokemons])
 
