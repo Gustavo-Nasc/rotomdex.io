@@ -1,15 +1,13 @@
-import React from "react";
-
 type SpinnerProps = {
-  color?: string;
-  className?: string;
-};
+  color?: string
+  className?: string
+}
 
 export function Spinner(props: SpinnerProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      stroke={props.color ? props.color : "#000"}
+      stroke={props.color ? props.color : '#000'}
       viewBox="0 0 24 24"
       className={props.className}
     >
@@ -50,5 +48,5 @@ export function Spinner(props: SpinnerProps) {
         ></animateTransform>
       </g>
     </svg>
-  );
+  )
 }
