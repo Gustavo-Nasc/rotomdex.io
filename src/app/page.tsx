@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Loading } from '@/components/Loading'
-import { PokemonCard } from '@/components/PokemonCard'
 
 import Pokedex, { Pokemon } from 'pokedex-promise-v2'
+import { PaginatedPokemons } from '@/components/PaginatedPokemons'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -38,8 +38,8 @@ export default function Home() {
   return (
     <main className="bg-[#060b28]">
       {isLoading && <Loading />}
-      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-        {pokemonList.map((pokemon) => (
+      <div className="p-6 grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        {/* {pokemonList.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
             abilities={pokemon.abilities}
@@ -61,7 +61,10 @@ export default function Home() {
             types={pokemon.types}
             weight={pokemon.weight}
           />
-        ))}
+        ))} */}
+        {!isLoading && (
+          <PaginatedPokemons items={pokemonList} itemsPerPage={20} />
+        )}
       </div>
     </main>
   )
