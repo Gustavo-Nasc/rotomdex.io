@@ -1,0 +1,10 @@
+.background {
+  @apply
+    absolute w-full h-full left-0 top-0 -z-[1] rounded-3xl overflow-hidden
+    bg-main/15
+    after:content-[""] after:block after:w-48 after:left-[50%] after:absolute
+    after:top-0 after:h-48 after:blur-[128px] after:-translate-x-[50%]
+  ;
+  transform: translate3d(0px, 0px, 0px);
+  backface-visibility: hidden;
+}

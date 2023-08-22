@@ -20,7 +20,6 @@ export function PaginatedPokemons({
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`)
   const currentPokemons = items.slice(itemOffset, endOffset)
   const pageCount = Math.ceil(items.length / itemsPerPage)
 
@@ -36,7 +35,6 @@ export function PaginatedPokemons({
           const newOffset = (event.selected * itemsPerPage) % items.length
           setItemOffset(newOffset)
         }}
-        pageRangeDisplayed={5}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
       />

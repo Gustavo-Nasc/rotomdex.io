@@ -1,34 +1,11 @@
 import Image from 'next/image'
 import { Pokemon } from 'pokedex-promise-v2'
 import { tv } from 'tailwind-variants'
-import { CgDetailsMore } from 'react-icons/cg'
+import { TbListDetails } from 'react-icons/tb'
+import './PokemonCard.css'
 
 const pokemonCard = tv({
-  base: 'text-white pb-0 rounded-md',
-  variants: {
-    backgroundColor: {
-      bug: 'bg-bug',
-      dark: 'bg-dark',
-      dragon: 'bg-dragon',
-      fairy: 'bg-fairy',
-      fighting: 'bg-fighting',
-      fire: 'bg-fire',
-      flying: 'bg-flying',
-      ghost: 'bg-ghost',
-      grass: 'bg-grass',
-      ground: 'bg-ground',
-      ice: 'bg-ice',
-      normal: 'bg-normal',
-      poison: 'bg-poison',
-      psychic: 'bg-psychic',
-      rock: 'bg-rock',
-      steel: 'bg-steel',
-      water: 'bg-water',
-    },
-  },
-})
-
-const textColor = tv({
+  base: 'text-white rounded-3xl relative',
   variants: {
     color: {
       bug: 'text-bug',
@@ -52,26 +29,27 @@ const textColor = tv({
   },
 })
 
-const svgColor = tv({
+const background = tv({
+  base: 'background',
   variants: {
     color: {
-      bug: 'fill-bug',
-      dark: 'fill-dark',
-      dragon: 'fill-dragon',
-      fairy: 'fill-fairy',
-      fighting: 'fill-fighting',
-      fire: 'fill-fire',
-      flying: 'fill-flying',
-      ghost: 'fill-ghost',
-      grass: 'fill-grass',
-      ground: 'fill-ground',
-      ice: 'fill-ice',
-      normal: 'fill-normal',
-      poison: 'fill-poison',
-      psychic: 'fill-psychic',
-      rock: 'fill-rock',
-      steel: 'fill-steel',
-      water: 'fill-water',
+      bug: 'after:bg-bug',
+      dark: 'after:bg-dark',
+      dragon: 'after:bg-dragon',
+      fairy: 'after:bg-fairy',
+      fighting: 'after:bg-fighting',
+      fire: 'after:bg-fire',
+      flying: 'after:bg-flying',
+      ghost: 'after:bg-ghost',
+      grass: 'after:bg-grass',
+      ground: 'after:bg-ground',
+      ice: 'after:bg-ice',
+      normal: 'after:bg-normal',
+      poison: 'after:bg-poison',
+      psychic: 'after:bg-psychic',
+      rock: 'after:bg-rock',
+      steel: 'after:bg-steel',
+      water: 'after:bg-water',
     },
   },
 })
@@ -88,24 +66,24 @@ export function PokemonCard(pokemon: Pokemon) {
   }
 
   return (
-    <div
-      className={pokemonCard({ backgroundColor: pokemon.types[0].type.name })}
-    >
-      <div className="p-6">
+    <div className="text-white pb-0 rounded-lg relative">
+      <div className="p-6 z-[1] relative">
+        <div className={background({ color: pokemon.types[0].type.name })} />
         <Image
           src={pokemon.sprites.other.home.front_default}
           alt={pokemon.name}
           width={512}
           height={512}
+          className="top-0 mb-4 -mt-44 w-[80%] mx-auto"
         />
         <h1>{pokemon.name}</h1>
         <p>{returnPokemonId()}</p>
       </div>
-      <button className="flex gap-2 mr-10 items-center justify-center w-full bg-white">
-        <CgDetailsMore
-          color={svgColor({ color: pokemon.types[0].type.name })}
+      <button className="flex gap-2 font-bold mr-10 items-center justify-center w-full bg-white rounded-b-3xl py-2">
+        <TbListDetails
+          className={pokemonCard({ color: pokemon.types[0].type.name })}
         />
-        <span className={textColor({ color: pokemon.types[0].type.name })}>
+        <span className={pokemonCard({ color: pokemon.types[0].type.name })}>
           Mais Detalhes
         </span>
       </button>

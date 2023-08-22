@@ -38,30 +38,7 @@ export default function Home() {
   return (
     <main className="bg-[#060b28]">
       {isLoading && <Loading />}
-      <div className="p-6 grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {/* {pokemonList.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.name}
-            abilities={pokemon.abilities}
-            base_experience={pokemon.base_experience}
-            forms={pokemon.forms}
-            game_indices={pokemon.game_indices}
-            height={pokemon.height}
-            held_items={pokemon.held_items}
-            id={pokemon.id}
-            is_default={pokemon.is_default}
-            location_area_encounters={pokemon.location_area_encounters}
-            moves={pokemon.moves}
-            name={pokemon.name}
-            order={pokemon.order}
-            past_types={pokemon.past_types}
-            species={pokemon.species}
-            sprites={pokemon.sprites}
-            stats={pokemon.stats}
-            types={pokemon.types}
-            weight={pokemon.weight}
-          />
-        ))} */}
+      <div className="p-6 grid gap-x-6 gap-y-40 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {!isLoading && (
           <PaginatedPokemons items={pokemonList} itemsPerPage={20} />
         )}
