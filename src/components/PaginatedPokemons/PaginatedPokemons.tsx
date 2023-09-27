@@ -1,7 +1,10 @@
 import { Pokemon } from 'pokedex-promise-v2'
 import { useState } from 'react'
 import ReactPaginate from 'react-paginate'
-import { Pokemons } from './Pokemons'
+import * as Icon from '@phosphor-icons/react'
+import './PaginatedPokemons.css'
+
+import { Pokemons } from '../Pokemons'
 
 type PaginatedPokemonsProps = {
   itemsPerPage: number
@@ -25,12 +28,14 @@ export function PaginatedPokemons({
 
   return (
     <>
-      <Pokemons currentPokemons={currentPokemons} />
+      <div className="paginated-pokemons">
+        <Pokemons currentPokemons={currentPokemons} />
+      </div>
       <ReactPaginate
-        className="text-white"
+        className="pagination-pokemons"
         breakLabel="..."
-        nextLabel="next >"
-        previousLabel="< previous"
+        nextLabel={<Icon.CaretRight weight="bold" size={25} />}
+        previousLabel={<Icon.CaretLeft weight="bold" size={25} />}
         onPageChange={(event) => {
           const newOffset = (event.selected * itemsPerPage) % items.length
           setItemOffset(newOffset)

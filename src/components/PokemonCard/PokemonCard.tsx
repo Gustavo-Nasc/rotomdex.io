@@ -1,30 +1,32 @@
 import Image from 'next/image'
 import { Pokemon } from 'pokedex-promise-v2'
 import { tv } from 'tailwind-variants'
-import { TbListDetails } from 'react-icons/tb'
+
+import { PokemonType } from '../PokemonType'
 import './PokemonCard.css'
 
-const pokemonCard = tv({
-  base: 'text-white rounded-3xl relative',
+const button = tv({
+  base: 'flex gap-2 font-bold mr-10 items-center justify-center w-full text-white rounded-b-lg py-2',
   variants: {
     color: {
-      bug: 'text-bug',
-      dark: 'text-dark',
-      dragon: 'text-dragon',
-      fairy: 'text-fairy',
-      fighting: 'text-fighting',
-      fire: 'text-fire',
-      flying: 'text-flying',
-      ghost: 'text-ghost',
-      grass: 'text-grass',
-      ground: 'text-ground',
-      ice: 'text-ice',
-      normal: 'text-normal',
-      poison: 'text-poison',
-      psychic: 'text-psychic',
-      rock: 'text-rock',
-      steel: 'text-steel',
-      water: 'text-water',
+      bug: 'bg-bug',
+      dark: 'bg-dark',
+      dragon: 'bg-dragon',
+      electric: 'bg-electric',
+      fairy: 'bg-fairy',
+      fighting: 'bg-fighting',
+      fire: 'bg-fire',
+      flying: 'bg-flying',
+      ghost: 'bg-ghost',
+      grass: 'bg-grass',
+      ground: 'bg-ground',
+      ice: 'bg-ice',
+      normal: 'bg-normal',
+      poison: 'bg-poison',
+      psychic: 'bg-psychic',
+      rock: 'bg-rock',
+      steel: 'bg-steel',
+      water: 'bg-water',
     },
   },
 })
@@ -36,6 +38,7 @@ const background = tv({
       bug: 'after:bg-bug',
       dark: 'after:bg-dark',
       dragon: 'after:bg-dragon',
+      electric: 'after:bg-electric',
       fairy: 'after:bg-fairy',
       fighting: 'after:bg-fighting',
       fire: 'after:bg-fire',
@@ -55,8 +58,6 @@ const background = tv({
 })
 
 export function PokemonCard(pokemon: Pokemon) {
-  const imagePokemon = !!pokemon.sprites.other.home.front_default
-
   function returnPokemonId() {
     if (pokemon.id.toString().length === 1) return `#0000${pokemon.id}`
     else if (pokemon.id.toString().length === 2) return `#000${pokemon.id}`
@@ -65,27 +66,47 @@ export function PokemonCard(pokemon: Pokemon) {
     else return `#${pokemon.id}`
   }
 
+  function returnPokemonName() {
+    const pokemonNameArray = pokemon.name.split('-')
+    let pokemonName = ''
+
+    pokemonNameArray.forEach((string) => {
+      pokemonName += string.charAt(0).toUpperCase() + string.slice(1) + ' '
+    })
+
+    return pokemonName
+  }
+
   return (
-    <div className="text-white pb-0 rounded-lg relative">
-      <div className="p-6 z-[1] relative">
+    <div className="pokemon-card">
+      <div className="py-6 z-[1] relative">
         <div className={background({ color: pokemon.types[0].type.name })} />
         <Image
           src={pokemon.sprites.other.home.front_default}
           alt={pokemon.name}
-          width={512}
-          height={512}
-          className="top-0 mb-4 -mt-44 w-[80%] mx-auto"
+          width={256}
+          height={256}
+          className="mb-6 -mt-44 mx-auto"
         />
-        <h1>{pokemon.name}</h1>
-        <p>{returnPokemonId()}</p>
+        <div className="flex flex-col items-center font-bold">
+          <span className="text-xl mb-2">{returnPokemonId()}</span>
+          <h1 className="text-4xl mb-3">{returnPokemonName()}</h1>
+
+          <div className="flex gap-2">
+            {pokemon.types.map((type) => (
+              <PokemonType slot={type.slot} type={type.type} key={type.slot} />
+            ))}
+          </div>
+        </div>
       </div>
-      <button className="flex gap-2 font-bold mr-10 items-center justify-center w-full bg-white rounded-b-3xl py-2">
-        <TbListDetails
-          className={pokemonCard({ color: pokemon.types[0].type.name })}
+      <button className={button({ color: pokemon.types[0].type.name })}>
+        <Image
+          src="/images/pokeball.png"
+          alt="pokeball"
+          width={16}
+          height={16}
         />
-        <span className={pokemonCard({ color: pokemon.types[0].type.name })}>
-          Mais Detalhes
-        </span>
+        Mais Detalhes
       </button>
     </div>
   )

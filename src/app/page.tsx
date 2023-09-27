@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Loading } from '@/components/Loading'
 
 import Pokedex, { Pokemon } from 'pokedex-promise-v2'
-import { PaginatedPokemons } from '@/components/PaginatedPokemons'
+import { PaginatedPokemons } from '@/components/PaginatedPokemons/PaginatedPokemons'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -29,7 +29,11 @@ export default function Home() {
       await pokedex
         .getPokemonByName(pokemonNames)
         .then((response) =>
-          response.forEach((pokemon) => pokemonList.push(pokemon)),
+          response.forEach(
+            (pokemon) =>
+              pokemon.sprites.other.home.front_default &&
+              pokemonList.push(pokemon),
+          ),
         )
         .finally(() => setIsLoading(false))
     })()
@@ -38,11 +42,11 @@ export default function Home() {
   return (
     <main className="bg-[#060b28]">
       {isLoading && <Loading />}
-      <div className="p-6 grid gap-x-6 gap-y-40 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {!isLoading && (
-          <PaginatedPokemons items={pokemonList} itemsPerPage={20} />
-        )}
-      </div>
+      {!isLoading && (
+        <div className="p-6">
+          <PaginatedPokemons items={pokemonList} itemsPerPage={15} />
+        </div>
+      )}
     </main>
   )
 }

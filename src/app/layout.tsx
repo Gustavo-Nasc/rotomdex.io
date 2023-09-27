@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Quicksand } from 'next/font/google'
 
-const montserrat = Montserrat({ subsets: ['latin'], weight: ['700', '400'] })
+const font = Quicksand({ subsets: ['latin'], weight: ['700', '400'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={montserrat.className}>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
   )
 }

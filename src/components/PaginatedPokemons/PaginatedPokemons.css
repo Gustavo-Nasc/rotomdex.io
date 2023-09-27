@@ -1,0 +1,46 @@
+.paginated-pokemons {
+  @apply
+    mb-10 grid gap-x-6 gap-y-40 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+  ;
+}
+
+ul.pagination-pokemons {
+  @apply
+    text-white flex gap-2 items-center font-bold mx-auto max-w-[300px]
+    overflow-auto min-[425px]:max-w-max
+  ;
+}
+
+ul.pagination-pokemons li {
+  @apply
+    border-2 border-white rounded-md
+  ;
+}
+
+ul.pagination-pokemons li button,
+ul.pagination-pokemons li a {
+  @apply
+    w-9 h-9 grid place-content-center
+  ;
+}
+
+ul.pagination-pokemons li:last-child,
+ul.pagination-pokemons li:first-child,
+ul.pagination-pokemons li.break{
+  @apply
+    border-0 border-none w-max h-max p-0
+  ;
+}
+
+ul.pagination-pokemons li:last-child,
+ul.pagination-pokemons li:first-child {
+  @apply
+    hidden sm:block
+  ;
+}
+
+ul.pagination-pokemons li.selected {
+  @apply
+    bg-[#2f5aff]
+  ;
+}
