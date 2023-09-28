@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { Pokemon } from 'pokedex-promise-v2'
 import { tv } from 'tailwind-variants'
+import * as Dialog from '@radix-ui/react-dialog'
 
 import { PokemonType } from '../PokemonType'
 import './PokemonCard.css'
 
 const button = tv({
-  base: 'flex gap-2 font-bold mr-10 items-center justify-center w-full text-white rounded-b-lg py-2',
+  base: 'flex mt-auto gap-2 font-bold mr-10 items-center justify-center w-full text-white rounded-b-lg py-2',
   variants: {
     color: {
       bug: 'bg-bug',
@@ -79,7 +80,7 @@ export function PokemonCard(pokemon: Pokemon) {
 
   return (
     <div className="pokemon-card">
-      <div className="py-6 z-[1] relative">
+      <div className="py-6 z-[1] relative h-80 grid">
         <div className={background({ color: pokemon.types[0].type.name })} />
         <Image
           src={pokemon.sprites.other.home.front_default}
@@ -88,7 +89,7 @@ export function PokemonCard(pokemon: Pokemon) {
           height={256}
           className="mb-6 -mt-44 mx-auto"
         />
-        <div className="flex flex-col items-center font-bold">
+        <div className="flex flex-col items-center font-bold text-center px-3">
           <span className="text-xl mb-2">{returnPokemonId()}</span>
           <h1 className="text-4xl mb-3">{returnPokemonName()}</h1>
 
@@ -99,15 +100,24 @@ export function PokemonCard(pokemon: Pokemon) {
           </div>
         </div>
       </div>
-      <button className={button({ color: pokemon.types[0].type.name })}>
-        <Image
-          src="/images/pokeball.png"
-          alt="pokeball"
-          width={16}
-          height={16}
-        />
-        Mais Detalhes
-      </button>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <button className={button({ color: pokemon.types[0].type.name })}>
+            <Image
+              src="/images/pokeball.png"
+              alt="pokeball"
+              width={16}
+              height={16}
+            />
+            Mais Detalhes
+          </button>
+        </Dialog.Trigger>
+
+        <Dialog.Portal>
+          <Dialog.Overlay className="bg-black bg-opacity-20 data-[state=open]:animate-overlayShow fixed z-10 inset-0" />
+          <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] bg-white focus:outline-none"></Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   )
 }

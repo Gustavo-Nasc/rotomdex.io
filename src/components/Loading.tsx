@@ -9,7 +9,7 @@ export function Loading() {
   }, 20000)
 
   return (
-    <div className="text-white w-screen flex flex-col gap-4 items-center justify-center">
+    <div className="p-4 text-white w-screen flex flex-col text-center gap-4 items-center justify-center">
       <Spinner color="#fff" className="w-12 lg:w-16 xl:w-24" />
       <span className="font-bold text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
         Carregando Pokemons
