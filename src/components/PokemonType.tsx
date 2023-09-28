@@ -13,7 +13,7 @@ const background = tv({
       fairy: 'bg-fairy',
       fighting: 'bg-fighting',
       fire: 'bg-fire',
-      flying: 'bg-fly',
+      flying: 'bg-flying',
       ghost: 'bg-ghost',
       grass: 'bg-grass',
       ground: 'bg-ground',
@@ -33,7 +33,7 @@ export function PokemonType({ type, slot }: PokemonType) {
     <div className={background({ color: type.name })}>
       <Image
         src={`/images/pokemon-types/${type.name}.svg`}
-        alt={type.name}
+        alt={slot}
         width={14}
         height={14}
       />
